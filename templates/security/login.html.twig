@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="col-4 offset-4">
+    <div style="margin-top:30px">
+        <div class="card border-dark mb-3">
+        <div class="card-header"><h2>Connexion</h2></div>
+            <div class="card-body">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <label for="inputMail" class="sr-only">E-mail</label>
+                    <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" placeholder="Adresse e-mail..." required autofocus></br>
+                    <label for="inputPassword" class="sr-only">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe..." required></br>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button><br />
+                    {#<a href="" class="" style="text-align: right;">Réinitialiser le mot de passe</a>#}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

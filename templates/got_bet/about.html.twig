@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+{% block title %}GotBet - À propos{% endblock %}
+
+{% block body %}
+<div class="container" style="padding-top:30px">
+  <div class="row justify-content-center">
+    <!-- CARTE REGLEMENT -->
+    <div class="col-4">
+      <div class="container" style="margin-top:20px">
+        <div class="row">
+          <div class="col">
+            <div style="margin-left:20px;">
+              <div class="card mb-3" style="max-width: 20rem;">
+                <h3 class="card-header" style="font-family: 'viking'">Reglement du jeu</h3>
+                      <img style="height: 100%; width: 100%; display: block;" src="{{asset('img/reglement.jpg')}}" alt="Card image">
+                  <div class="card-body">
+                    <p class="card-text">Pour jouer, il suffit de répondre dans l'onglet questionnaire aux questions posées. Chaque réponse juste vous rapporte 1 point.
+                    </p>
+                  </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Remportez des cadeaux si vous faites partie des 4 scores les plus élevés.</li>
+                    </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CARTE CADEAUX -->
+    <div class="col-4">
+        <div class="container" style="margin-top:20px">
+          <div class="row">
+            <div class="col">
+              <div style="margin-left:20px;">
+                <div class="card mb-3" style="max-width: 20rem;">
+                  <h3 class="card-header" style="font-family: 'viking'">Cadeaux</h3>
+                        <img style="height: 100%; width: 100%; display: block;" src="{{asset('img/cadeauGotbet.png')}}" alt="Card image">
+                    <div class="card-body">
+                      <p class="card-text">Finissez dans les 4 premiers et remportez un des cadeaux offerts par le lycée</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CARTE CREDITS  -->
+      <div class="col-4">
+        <div class="container" style="margin-top:20px">
+          <div class="row">
+            <div class="col">
+              <div style="margin-left:20px;">
+                <div class="card mb-3" style="max-width: 20rem;">
+                  <h3 class="card-header" style="font-family: 'viking'">Credits</h3>
+                        <img style="height: 100%; width: 100%; display: block;" src="{{asset('img/HBO_logo.jpg')}}" alt="Card image">
+                    <div class="card-body">
+                      <p class="card-text">La vidéo, les images utilisées proviennent de HBO et cette première est la bande-annonce officielle de la saison 8 diffusée sur youtube.</br>
+                                           Ce site internet est à but non lucratif, et dans le cadre d'un projet d'étude en licence ASI.
+                      </p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- CARTE DEVELOPPEURS -->
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="container" style="margin-top:20px">
+        <div class="row">
+          <div class="col">
+            <div style="margin-left:20px;">
+              <div class="card mb-3" style="max-width: 20rem;">
+                <h3 class="card-header" style="font-family: 'viking'">Les developpeurs</h3>
+                  <div class="card-body">
+                    <h5 class="card-title">5 étudiants en licence ASI 1</h5>
+                    <h6 class="card-subtitle text-muted">1 professeur en développement</h6>
+                  </div>
+                      <img style="height: 100%; width: 100%; display: block;" src="{{asset('img/dev.jpg')}}" alt="Card image">
+                  <div class="card-body">
+                    <p class="card-text">Ce site a été développé en Symfony 4.2</p>
+                  </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Lucas ROUX :</br>
+                                                  Apprenti en 1ère année de licence ASI.
+                                                  <a href="https://www.linkedin.com/in/lucas-roux-28096b165/">Linkedin</a></li>
+                      <li class="list-group-item">Élodie CAVIN :</br>
+                                                  Apprentie en 1ère année de licence ASI.
+                                                  <a href="https://www.linkedin.com/in/elodie-cavin-104238162/">Linkedin</a></li>
+                      <li class="list-group-item">Jérémy ESTIENNE :</br>
+                                                  Apprenti en 1ère année de licence ASI.
+                                                  <a href="https://www.linkedin.com/in/jeremy-estienne-55b337167/">Linkedin</a></li>
+                      <li class="list-group-item">Rémi LEFEVRE :</br>
+                                                  Apprenti en 1ère année de licence ASI.
+                                                  <a href="https://www.linkedin.com/in/rémi-lefevre-0a7694168/">Linkedin</a></li>
+                      <li class="list-group-item">Sébastien PERNELLE :</br>
+                                                  Professeur en développement au Lycée Pasteur Mont-Roland à Dole</li>
+                      <li class="list-group-item">Kevin BATAILLE :</br>
+                                                  Apprenti du Lycée Pasteur Mont-Roland en 1ère année de licence ASI.<br/>
+                                                  <a href="https://www.linkedin.com/in/kevin-bataille-53a382163/">Linkedin</a></li>
+                    </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CARTE LYCEE -->
+    <div class="col-4">
+    <div class="container" style="margin-top:20px">
+      <div class="row">
+        <div class="col">
+          <div style="margin-left:20px;">
+            <div class="card mb-3" style="max-width: 20rem;">
+              <h3 class="card-header" style="font-family: 'viking'">Le lycee</h3>
+                  <img style="height: 200px; width: 100%; display: block;" src="{{asset('about2.png')}}" alt="Card image">
+                <div class="card-body">
+                  <p class="card-text">Dans le cadre d'un projet d'étude de première année de Licence ASI, nous avons réalisé ce site de pronostics sur le thème de Game Of Thrones, avec le soutien de notre professeur M.Pernelle.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+
+{% endblock %}

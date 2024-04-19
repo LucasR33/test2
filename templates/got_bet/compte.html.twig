@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GotBet - Mon compte{% endblock %}
+
+{% block body %}
+    <div class="jumbotron jumbotrol">
+        <h1 class="display-4" style="font-family: 'viking'">Les statistiques</h1>
+        <p class="lead">
+            Retrouvez vos pronostics et votre score.<br>
+            Mais aussi les statistiques sur les votes des autres joueurs !
+
+        </p>
+    </div>
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-15">
+        <p style="color: white; text-align: center;"><b>Attention</b>. L'affichage de vos réponses peut entraîner un spoil.</p>
+            <p class="btn-compte">
+                <a class="btn" id="spoil" href="#"><b>Cliquez ici pour vos réponses</b>
+                    <span class='line-1'></span>
+                    <span class='line-2'></span>
+                    <span class='line-3'></span>
+                    <span class='line-4'></span>
+                </a>
+            </p>
+        <div style="margin-left:20px;">
+            <div class="card border-primary mb-3" style="max-width: 40rem;">
+                <div class="card-header">
+                    
+                    <div class="row" >
+                        <div class="col-6">
+                            <b>Mon score : {{res[0].total}}</b>
+                        </div>
+
+                        <div class="col-6" style="text-align: right;">
+                            <b>{{nb}}</b> participants
+                        </div>
+                    </div>
+                    {% if app.user.jouerBonnus ==  1 %}
+                    <div class="row">
+                        <div class="col-offset-3 col-9">
+                                <b>Votre trône : 
+                                    {% if bonus|length  > 0 %}
+                                        {{ bonus[0].nom }} {{ bonus[0].prenom}}
+                                    {% else %}
+                                        un autre personnage
+                                    {% endif %}
+                                </b>
+                        </div>
+                    </div>
+                     {% endif %}
+                </div>
+                    <div class="card-body">
+                        <table id="score" class="table table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Pronostic</th>
+                                    <th scope="col">Réponse</th>
+                                </tr>
+                            </thead>
+                                    <tbody>
+                                        {% for pr in persorep %}
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/' ~ pr.id ~ '.png')}}" style="width:100%" alt="..." class="img-thumbnail rounded-circle">
+                                             {% if app.user.jouerBonnus ==  1 %}
+                                                Trône : 
+                                                   <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{pr.trone}}%" aria-valuenow="{{pr.trone}}" aria-valuemin="0" aria-valuemax="100" title="{{pr.trone|round}}"></div>
+                                                   </div>
+                                             {% endif %}
+                                            </td>
+                                            <td style="vertical-align: middle"> {{ pr.nom }} </td>
+                                            <td style="vertical-align: middle"> {{ pr.prenom }} </td>
+                                            {% if pr.etat is null %}
+                                                 <td style="vertical-align: middle"> {{ pr.statut }} </td>
+                                             {% else%}
+                                                  {% if pr.statut == pr.etat %}
+                                                 <td style="color:green;vertical-align: middle">{{ pr.statut }} </td>
+                                             {% else%}
+                                                 <td style="color:red;vertical-align: middle">{{ pr.statut }} </td>
+                                             {% endif %}
+
+                                          {% endif %}
+
+                                             <td style="vertical-align: middle">{{ pr.etat }} </td>
+
+                                             <td>
+
+                                                   {% for s in pr.stats %}
+                                                        {% if s.libelle == 'Vivant' %}
+                                                        {{s.libelle}} : 
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100" title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% elseif s.libelle == 'Marcheur blanc' %}
+                                                        {{s.libelle}} : 
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100" title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% elseif s.libelle == 'Mort' %}
+                                                        {{s.libelle}} : 
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100" title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% else %}
+                                                        Non voté : 
+                                                            <div class="progress">
+                                                              <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100"  title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% endif %}
+                                                     
+                                                   {% endfor %}
+                                              </td>
+                                          </tr>
+                                        {% endfor %}
+                                 {% if nbAutre>0%}
+                                 <tr>
+                                     <td style="vertical-align: middle">
+                                        Trône : 
+                                        <div class="progress">
+                                             <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{nbAutre}}%" aria-valuenow="{{nbAutre}}" aria-valuemin="0" aria-valuemax="100" title="{{nbAutre|round}}"></div>
+                                        </div>
+                                     </td>
+                                    <td style="vertical-align: middle">Autre</td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td >
+
+                                        
+                                    </td>
+                                </tr>
+                                 {% endif %}
+                                    </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function(){
+    $("#spoil").click(function(){
+        $("#score").fadeIn("slow");
+        $("#spoil").hide();
+    })
+})
+</script>
+{% endblock %}

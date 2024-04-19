@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GotBet - Questionnaire{% endblock %}
+
+{% block body  %}
+
+    {% if (app.user.jouer == 0)%}
+    <div class="jumbotrol" >
+        <h1 class="display-5" style="font-family: 'viking'" >Questionnaire</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <p class="lead">Devinez le sort des personnages de Game Of Thrones dans l'ultime saison </br>
+                                    Chaque bonne réponse vous rapportera 1 point</br>
+                                    Découvrez après le dernier épisode votre nombre de points et votre classement parmi tous les participants !</br></br>
+                                    Comment jouer ? </br>
+                                    Choisissez parmi la liste déroulante : vivant, mort ou marcheur blanc puis validez vos réponses</br>
+                                    Attention ! Toute validation est définitive: vous ne pourrez pas modifier vos pronostics
+                    </p>
+                </div>
+                <div class="col-3">
+                    <img style="width: 70%;" src="{{asset('img/cadeauGotbet.png')}}" alt="cadeauxGot">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-15">
+            <div style="margin-left:20px;">
+                <div class="card border-primary mb-3" style="max-width: 50rem;">
+                    <div class="card-header"> </div>
+                        <div class="card-body">
+                        <form action="{{ path('createReponse') }}" method="POST">
+                            <table class="table table">
+
+                                        <tbody>
+                                            <form action="">
+                                                {% for perso in personnages %}
+                                                    <tr>
+                                                    <td><img src="{{asset('img/personnages/' ~ perso.id ~ '.png')}}" style="width:50%" alt="..." class="img-thumbnail rounded-circle"></td>
+                                                    <td style="vertical-align:middle">{{ perso.prenom }}</td>
+                                                    <td style="vertical-align:middle" id="{{ perso.id }}" class="id">{{ perso.nom }}</td>
+                                                    <td style="vertical-align:middle">
+                                                        <div class="form-group">
+                                                            <select class="custom-select" name="statut_{{ perso.id }}" id="statut_{{ perso.id }}">
+                                                                <option>Etat</option>
+                                                                <option>Vivant</option>
+                                                                <option>Mort</option>
+                                                                <option>Marcheur blanc</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </form>
+                                        </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-outline-primary btn-block" id="validate">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    {% else %}
+    <div class="jumbotrol" >
+        <h1 class="display-4" style="font-family: 'viking'">Questionnaire</h1>
+        <p class="lead">Vous avez déjà répondu au questionnaire. </br>
+                        Rendez-vous sur les <a class="link" href="{{path('compte')}}">statistiques</a> et comparer vos réponses avec les autres participants.
+        </p>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block script %}
+
+<script>
+    $("#validate").click(function(){
+        var id= $(".id").attr("id");
+        var statut= $("#statut").val();
+        $.ajax({
+            type:"POST",
+            url:"{{path('createReponse')}}",
+            data: "id = "+ id +"& statut = "+ statut,
+            success: function(data){
+                console.log(data);
+            }
+        })
+    });
+</script>
+
+{% endblock %}
